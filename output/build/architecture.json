@@ -1,0 +1,17 @@
+{
+  "projectRoot": "D:\\work\\AIPM\\Project_yantu",
+  "existingStack": null,
+  "targetStack": { "client": "WeChat Native Mini Program", "language": "JavaScript/WXML/WXSS", "baseLibrary": "3.6.4", "dependencies": "none" },
+  "modules": [
+    { "name": "mini-program", "type": "client", "paths": ["pages", "services", "data", "utils"], "p0": true }
+  ],
+  "dataStores": [{ "name": "wx.storage", "purpose": "trip, event, note and privacy preferences", "migration": "seed-on-first-launch" }],
+  "auth": { "required": false, "reason": "local-first single-user MVP; no remote account or protected API" },
+  "integrations": [
+    { "name": "WeChat album", "adapter": "services/photo-adapter.js", "status": "integrated via wx.chooseMedia" },
+    { "name": "WeChat map", "adapter": "native map component", "status": "integrated with local coordinates" },
+    { "name": "EXIF/GPS/AI", "adapter": "services/photo-adapter.js", "status": "production-blocked; deterministic offline demo" }
+  ],
+  "environments": { "development": "WeChat DevTools tourist AppID", "production": "real AppID and approved service categories required" },
+  "commands": { "lint": "node scripts/validate.js", "test": "node scripts/test.js", "build": "node scripts/build.js", "migrationDir": null }
+}

@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/timeline/timeline",
+    "pages/profile/profile",
+    "pages/trip/trip",
+    "pages/day/day",
+    "pages/event/event",
+    "pages/map/map",
+    "pages/memory/memory"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#f4f5f2",
+    "backgroundTextStyle": "dark"
+  },
+  "usingComponents": {
+    "b": "/components/strong/strong",
+    "i": "/components/dot/dot",
+    "br": "/components/break/break"
+  },
+  "tabBar": {
+    "color": "#8b8d88",
+    "selectedColor": "#171916",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "回忆" },
+      { "pagePath": "pages/timeline/timeline", "text": "时间线" },
+      { "pagePath": "pages/profile/profile", "text": "我" }
+    ]
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

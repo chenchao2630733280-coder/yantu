@@ -1,0 +1,7 @@
+{
+  "p0Drift": [],
+  "external": [
+    { "contract": "photo-content-analysis", "status": "not_configured", "impact": "demo stories are seeded rather than generated", "adapter": "services/photo-adapter.js" },
+    { "contract": "reverse-geocoding", "status": "not_configured", "impact": "demo coordinates and place names are seeded", "adapter": "pages/map/map.js" }
+  ]
+}

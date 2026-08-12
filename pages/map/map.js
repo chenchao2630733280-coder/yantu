@@ -1,0 +1,2 @@
+const store=require('../../services/store');const nav=require('../../utils/nav')
+Page({data:{events:[],markers:[],selected:{}},onLoad(){const events=store.getEvents(2);this.setData({events,selected:events[0],markers:events.map((e,i)=>({id:i+1,latitude:e.lat,longitude:e.lng,width:30,height:30,label:{content:String(i+1),color:'#fff',fontSize:11,bgColor:'#f36b2b',borderRadius:14,padding:4}}))})},back:nav.back,mark(e){const i=e.detail.markerId-1;this.setData({selected:this.data.events[i]})},open(){nav.event(this.data.selected.id)}})

@@ -1,0 +1,8 @@
+{
+  "status": "demo_ready_production_blocked",
+  "blocking": [
+    { "id": "BLK-001", "scope": "production", "reason": "real WeChat AppID and real-device permission review not available" },
+    { "id": "BLK-002", "scope": "production", "reason": "EXIF/GPS clustering, reverse geocoding and AI credentials/service not supplied" }
+  ],
+  "demoBlocking": []
+}

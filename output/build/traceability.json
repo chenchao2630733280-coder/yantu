@@ -1,0 +1,14 @@
+{
+  "requirements": [
+    { "id": "P01", "title": "回忆发现首页", "implementation": ["pages/home/home.*"], "tests": ["scripts/validate.js"], "status": "covered" },
+    { "id": "P02", "title": "旅行发现确认卡", "implementation": ["pages/trip/trip.*","services/store.js"], "tests": ["scripts/validate.js"], "status": "covered" },
+    { "id": "P03", "title": "旅程概览", "implementation": ["pages/trip/trip.*"], "tests": ["scripts/test.js"], "status": "covered" },
+    { "id": "P04", "title": "Day 时间线", "implementation": ["pages/day/day.*"], "tests": ["scripts/test.js"], "status": "covered" },
+    { "id": "P05", "title": "事件详情", "implementation": ["pages/event/event.*"], "tests": ["scripts/test.js"], "status": "covered" },
+    { "id": "P06", "title": "旅行地图", "implementation": ["pages/map/map.*"], "tests": ["scripts/validate.js"], "status": "covered" },
+    { "id": "P07", "title": "回忆卡片", "implementation": ["pages/memory/memory.*"], "tests": ["scripts/build.js"], "status": "covered" },
+    { "id": "P08", "title": "年度时间线", "implementation": ["pages/timeline/timeline.*"], "tests": ["scripts/validate.js"], "status": "covered" },
+    { "id": "P09", "title": "隐私设置", "implementation": ["pages/profile/profile.*"], "tests": ["scripts/validate.js"], "status": "covered" },
+    { "id": "BR-005", "title": "真实 AI 自动识别", "implementation": ["services/photo-adapter.js"], "tests": [], "status": "external_blocked", "reason": "requires real AppID, user consent, EXIF parser and AI service credentials" }
+  ]
+}

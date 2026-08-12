@@ -1,0 +1,12 @@
+{
+  "name": "shilv-wechat-mini-program",
+  "version": "1.0.0",
+  "private": true,
+  "description": "拾旅 - 自动还原旅行记忆的微信小程序",
+  "scripts": {
+    "lint": "node scripts/validate.js",
+    "test": "node scripts/test.js",
+    "build": "node scripts/build.js",
+    "check": "npm run lint && npm test && npm run build"
+  }
+}

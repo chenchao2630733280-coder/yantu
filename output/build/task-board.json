@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    { "id": "T-001", "sliceId": "S01", "title": "发现并确认旅行", "sourceIds": ["P01","P02","BR-001","PERM-001"], "dependencies": [], "targetFiles": ["pages/home","pages/trip","services/photo-adapter.js"], "verificationCommands": ["node scripts/validate.js"], "status": "completed" },
+    { "id": "T-002", "sliceId": "S02", "title": "旅程、Day 与事件回看", "sourceIds": ["P03","P04","P05","BR-002"], "dependencies": ["T-001"], "targetFiles": ["pages/trip","pages/day","pages/event"], "verificationCommands": ["node scripts/test.js"], "status": "completed" },
+    { "id": "T-003", "sliceId": "S03", "title": "纠错与补写记忆", "sourceIds": ["BR-003","VR-001","SM-001"], "dependencies": ["T-002"], "targetFiles": ["services/store.js","pages/event"], "verificationCommands": ["node scripts/test.js"], "status": "completed" },
+    { "id": "T-004", "sliceId": "S04", "title": "地图与回忆卡片", "sourceIds": ["P06","P07","BR-004"], "dependencies": ["T-002"], "targetFiles": ["pages/map","pages/memory"], "verificationCommands": ["node scripts/build.js"], "status": "completed" },
+    { "id": "T-005", "sliceId": "S05", "title": "长期入口与隐私", "sourceIds": ["P08","P09","PERM-002"], "dependencies": ["T-001"], "targetFiles": ["pages/timeline","pages/profile"], "verificationCommands": ["node scripts/validate.js"], "status": "completed" },
+    { "id": "T-006", "sliceId": "PROD", "title": "接入真实 EXIF/GPS/AI 服务", "sourceIds": ["BR-005"], "dependencies": ["T-001"], "targetFiles": ["services/photo-adapter.js"], "verificationCommands": [], "status": "blocked_external" }
+  ]
+}

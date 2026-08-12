@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="safe-top"></view>
+  <view class="nav"><view><view class="display">时间线</view><view class="subtle">照片替你记得每一次出发</view></view></view>
+  <view class="year-group" wx:for="{{groups}}" wx:key="year">
+    <view class="year">{{item.year}}</view>
+    <view class="year-rail"><view class="line"></view>
+      <view wx:for="{{item.trips}}" wx:for-item="trip" wx:key="id" class="timeline-trip card" data-id="{{trip.id}}" bindtap="open">
+        <i></i>
+        <view class="photo-frame timeline-photo"><image class="photo-atlas tile-{{trip.coverTile}}" src="/assets/kansai-atlas.png" mode="scaleToFill"/></view>
+        <view class="timeline-copy"><b>{{trip.title}}</b><text>{{trip.dateRange}}</text><text>{{trip.days}} 天 · {{trip.photos}} 张照片</text><view>{{trip.routeArrowText}}</view></view>
+      </view>
+    </view>
+  </view>
+</view>

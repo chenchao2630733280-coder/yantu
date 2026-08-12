@@ -1,0 +1,51 @@
+page {
+  --ink: #171916;
+  --muted: #777b74;
+  --paper: #f4f5f2;
+  --card: #ffffff;
+  --line: #e7e9e4;
+  --orange: #f36b2b;
+  --green: #6d8a53;
+  --blue: #496db7;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 28rpx;
+}
+
+view, text, image, button, input, textarea, scroll-view, map { box-sizing: border-box; }
+button { margin: 0; }
+button::after { border: 0; }
+
+.page { min-height: 100vh; padding: 0 28rpx 56rpx; }
+.safe-top { height: calc(env(safe-area-inset-top) + 24rpx); }
+.nav { height: 88rpx; display: flex; align-items: center; justify-content: space-between; }
+.nav-title { font-size: 34rpx; font-weight: 750; letter-spacing: -1rpx; }
+.nav-action, .back { width: 72rpx; height: 72rpx; display: flex; align-items: center; justify-content: center; font-size: 38rpx; }
+.back { justify-content: flex-start; }
+.eyebrow { font-size: 22rpx; color: var(--muted); letter-spacing: 2rpx; text-transform: uppercase; }
+.display { font-family: "Songti SC", "STSong", serif; font-size: 54rpx; line-height: 1.15; font-weight: 700; letter-spacing: -3rpx; }
+.section-title { font-size: 34rpx; line-height: 1.25; font-weight: 750; letter-spacing: -1rpx; }
+.subtle { color: var(--muted); font-size: 24rpx; line-height: 1.5; }
+.card { background: var(--card); border: 1rpx solid rgba(23,25,22,.04); border-radius: 28rpx; box-shadow: 0 10rpx 32rpx rgba(23,25,22,.05); }
+.pill { display: inline-flex; align-items: center; min-height: 42rpx; padding: 0 18rpx; border-radius: 24rpx; background: #eef0ec; color: #60645e; font-size: 22rpx; }
+.pill.orange { background: #fff0e8; color: #d5521b; }
+.primary { height: 92rpx; border-radius: 24rpx; background: var(--ink); color: white; display: flex; align-items: center; justify-content: center; font-size: 28rpx; font-weight: 650; }
+.secondary { height: 82rpx; border-radius: 22rpx; background: #fff; color: var(--ink); border: 1rpx solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 26rpx; }
+.divider { height: 1rpx; background: var(--line); }
+.photo-frame { position: relative; overflow: hidden; background: #d9ddd5; }
+.photo-atlas { position: absolute; width: 400%; height: 200%; max-width: none; }
+.tile-0 { left: 0; top: 0; }
+.tile-1 { left: -100%; top: 0; }
+.tile-2 { left: -200%; top: 0; }
+.tile-3 { left: -300%; top: 0; }
+.tile-4 { left: 0; top: -100%; }
+.tile-5 { left: -100%; top: -100%; }
+.tile-6 { left: -200%; top: -100%; }
+.tile-7 { left: -300%; top: -100%; }
+.toast { position: fixed; z-index: 99; left: 50%; bottom: 170rpx; transform: translateX(-50%); background: rgba(23,25,22,.92); color: #fff; padding: 20rpx 28rpx; border-radius: 20rpx; font-size: 24rpx; white-space: nowrap; }
+.strong { font-weight: 700; }
+.image-atlas-note { display: none; background-image: url('/assets/kansai-atlas.jpg'); }
+.stats .strong { display: block; font-size: 34rpx; color: var(--ink); }
+.route-point { display: block; width: 20rpx; height: 20rpx; border-radius: 50%; background: var(--orange); border: 6rpx solid white; margin: 0 auto 13rpx; }
+.day-no .strong { display: block; }

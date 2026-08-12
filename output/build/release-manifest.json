@@ -1,0 +1,9 @@
+{
+  "name": "拾旅",
+  "version": "1.0.0-demo",
+  "artifactType": "WeChat native mini program source",
+  "entry": "project.config.json",
+  "verification": ["node scripts/validate.js", "node scripts/test.js", "node scripts/build.js"],
+  "status": "deployment_files_prepared_not_deployed",
+  "rollback": "Use profile reset for local data; restore prior source package for code rollback"
+}

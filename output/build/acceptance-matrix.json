@@ -1,0 +1,9 @@
+{
+  "executedAt": "2026-08-12T00:00:00+08:00",
+  "items": [
+    { "id": "P01-P09", "type": "static route/source coverage", "command": "node scripts/validate.js", "result": "passed", "count": "8 routes + 3 global components" },
+    { "id": "BR-001-BR-004", "type": "domain unit smoke", "command": "node scripts/test.js", "result": "passed", "count": "6 assertions" },
+    { "id": "PERF-001", "type": "build preflight", "command": "node scripts/build.js", "result": "passed", "count": "runtime atlas 0.42 MB" },
+    { "id": "PERM-001", "type": "manual real-device", "result": "not_run", "reason": "requires WeChat DevTools or real device with AppID" }
+  ]
+}

@@ -1,0 +1,13 @@
+<view class="page home">
+  <view class="safe-top"></view>
+  <view class="nav"><view><view class="display brand">拾旅</view><view class="brand-line">让照片，重新变成旅途</view></view><view class="nav-action" bindtap="scan">⌁</view></view>
+  <view class="intro"><view><text class="section-title">发现 {{trips.length}} 次旅行</text><view class="subtle">我们在本机按时间与地点整理了这些旅程</view></view><button class="scan" loading="{{scanning}}" bindtap="scan">扫描相册</button></view>
+  <view class="privacy"><text class="privacy-dot">●</text><view><text>照片优先在本机整理</text><view class="subtle">确认某次旅行后，才会分析相关内容</view></view></view>
+  <view class="trip-list">
+    <view wx:for="{{trips}}" wx:key="id" class="trip-card card" data-id="{{item.id}}" bindtap="openTrip">
+      <view class="photo-frame cover"><image class="photo-atlas tile-{{item.coverTile}}" src="/assets/kansai-atlas.png" mode="scaleToFill"/></view>
+      <view class="trip-copy"><view wx:if="{{item.discovered && !item.confirmed}}" class="new-label">● 新发现</view><view class="trip-title">{{item.title}}</view><view class="trip-date">{{item.dateRange}}</view><view class="trip-meta">{{item.days}} 天 · {{item.photos}} 张照片</view><view class="trip-route">{{item.routeText}}</view></view><view class="chevron">›</view>
+    </view>
+  </view>
+  <view wx:if="{{toast}}" class="toast">{{toast}}</view>
+</view>

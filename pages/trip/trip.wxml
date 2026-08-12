@@ -1,0 +1,11 @@
+<view class="trip-page">
+ <view class="hero photo-frame"><image class="photo-atlas tile-{{trip.coverTile}}" src="/assets/kansai-atlas.png" mode="scaleToFill"/><view class="hero-shade"></view><view class="safe-top"></view><view class="hero-nav"><view class="back light" bindtap="back">‹</view><view class="hero-actions">↗　•••</view></view><view class="hero-copy"><view class="pill orange" wx:if="{{!trip.confirmed}}">● 新发现</view><view class="display">{{trip.title}}</view><view>{{trip.dateRange}}</view></view></view>
+ <view class="sheet">
+  <view class="stats"><view><text class="strong">{{trip.days}}</text><text>天</text></view><view><text class="strong">{{trip.photos}}</text><text>张照片</text></view><view><text class="strong">{{trip.places}}</text><text>个地点</text></view><view><text class="strong">{{trip.cities}}</text><text>个城市</text></view></view>
+  <view class="route-band"><view class="route-line"></view><view wx:for="{{trip.route}}" wx:key="*this" class="route-stop"><view class="route-point"></view><text>{{item}}</text></view></view>
+  <view wx:if="{{!trip.confirmed}}" class="confirm card"><view class="section-title">这是你的旅行吗？</view><view class="subtle">时间连续、地点变化明显，我们推测这是一段完整旅程。</view><button class="primary" bindtap="confirm">这是我的旅行</button><button class="reject" bindtap="reject">可能不是这次旅行</button></view>
+  <view class="story-head"><view><view class="section-title">旅程故事线</view><view class="subtle">点一天，重新走过当天的故事</view></view><view class="memory-link" bindtap="openMemory">回忆卡片 ›</view></view>
+  <view class="day-list"><view wx:for="{{trip.dayList}}" wx:key="day" class="day card" data-day="{{item.day}}" bindtap="openDay"><view class="day-no" style="color:{{item.color}}"><text class="strong">Day {{item.day}}</text><text>{{item.date}}</text></view><view class="day-body"><view class="day-row"><text class="strong">{{item.title}}</text><text>{{item.photos}} 张</text></view><view class="subtle">{{item.subtitle}}</view><view class="thumbs"><view wx:for="{{item.tiles}}" wx:for-item="tile" wx:key="*this" class="photo-frame thumb"><image class="photo-atlas tile-{{tile}}" src="/assets/kansai-atlas.png" mode="scaleToFill"/></view></view></view></view></view>
+  <button class="secondary map-button" bindtap="openMap">⌖　查看旅行地图</button>
+ </view><view wx:if="{{toast}}" class="toast">{{toast}}</view>
+</view>

@@ -1,0 +1,52 @@
+{
+  "description": "拾旅 · AI 旅行记忆微信小程序",
+  "packOptions": {
+    "ignore": [
+      { "type": "folder", "value": "output" },
+      { "type": "folder", "value": "scripts" },
+      { "type": "file", "value": "README.md" },
+      { "type": "file", "value": "package.json" },
+      { "type": "file", "value": "image.png" },
+      { "type": "file", "value": "需求.md" },
+      { "type": "file", "value": "交互设计.md" },
+      { "type": "file", "value": "assets/kansai-atlas-original.png" },
+      { "type": "file", "value": "assets/kansai-atlas.jpg" }
+    ],
+    "include": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "checkSiteMap": true,
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.6.4",
+  "appid": "wx14f80675680ba485",
+  "projectname": "拾旅",
+  "simulatorType": "wechat",
+  "condition": {},
+  "simulatorPluginLibVersion": {},
+  "isGameTourist": false,
+  "editorSetting": {}
+}

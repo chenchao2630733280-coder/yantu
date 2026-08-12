@@ -1,0 +1,2 @@
+const store=require('../../services/store');const nav=require('../../utils/nav')
+Page({data:{trip:{},events:[]},onLoad(){this.setData({trip:store.getTrip('kansai-2026'),events:store.getEvents(2).slice(0,4)})},back:nav.back,share(){wx.showShareMenu({menus:['shareAppMessage']});wx.showToast({title:'可从右上角分享'})},onShareAppMessage(){return{title:'我的日本关西之旅 · 拾旅',path:'/pages/trip/trip?id=kansai-2026'}}})

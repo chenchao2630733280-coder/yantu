@@ -1,0 +1,2 @@
+const store=require('../../services/store');const nav=require('../../utils/nav')
+Page({data:{groups:[]},onShow(){const trips=store.getState().trips.filter(x=>!x.hidden).map(x=>Object.assign({},x,{routeArrowText:(x.route||[]).join(' → ')}));const groups=[{year:'2026',trips:trips.filter(x=>x.dateRange.includes('2026'))},{year:'2025',trips:trips.filter(x=>x.dateRange.includes('2025')&&!x.dateRange.startsWith('2026'))}].filter(x=>x.trips.length);this.setData({groups})},open(e){nav.trip(e.currentTarget.dataset.id)}})

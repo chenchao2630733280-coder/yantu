@@ -1,0 +1,9 @@
+{
+  "bugSummary": "微信开发者工具拒绝字符串形式的 packOptions.ignore",
+  "rootCause": "当前开发者工具要求 ignore 项为 file/folder 对象",
+  "fixFiles": ["project.config.json", "scripts/build.js"],
+  "fixDiff": "Converted nine ignore strings to typed objects and updated package-size validator",
+  "verified": true,
+  "retryCount": 0,
+  "timestamp": "2026-08-12T00:00:00+08:00"
+}
