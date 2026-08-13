@@ -2,3 +2,5 @@ node_modules/
 .DS_Store
 miniprogram_npm/
 project.private.config.json
+.pnpm-store/
+local.properties

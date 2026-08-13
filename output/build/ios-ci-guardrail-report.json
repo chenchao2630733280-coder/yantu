@@ -1,0 +1,13 @@
+{
+  "checkType": "path-check",
+  "operation": "write",
+  "paths": [
+    ".github/workflows/ios.yml"
+  ],
+  "riskLevel": "low",
+  "blocked": false,
+  "warnings": [
+    ".github/workflows/ios.yml: 路径不存在,按 low 处理"
+  ],
+  "timestamp": "2026-08-12T13:06:30+08:00"
+}

@@ -1,0 +1,14 @@
+{
+  "requirements": [
+    { "id": "IOS-P01", "title": "扫描完整授权照片库", "code": ["ios/ShiLv/Services/PhotoLibraryService.swift"], "evidence": "PHAsset.fetchAssets over image media type" },
+    { "id": "IOS-P02", "title": "自动发现旅行", "code": ["ios/ShiLv/Services/TripDetector.swift"], "tests": ["ios/ShiLvTests/TripDetectorTests.swift", "ios/scripts/test-detector-contract.js"] },
+    { "id": "IOS-P03", "title": "沉浸式发现与确认", "code": ["ios/ShiLv/Features/Discovery/DiscoveryView.swift", "ios/ShiLv/Features/Discovery/TripDiscoveryView.swift"] },
+    { "id": "IOS-P04", "title": "时间线、事件与精选照片", "code": ["ios/ShiLv/Features/Trip/TripOverviewView.swift", "ios/ShiLv/Features/Trip/DayTimelineView.swift", "ios/ShiLv/Services/TripDetector.swift"], "tests": ["ios/ShiLvTests/TripDetectorTests.swift"] },
+    { "id": "IOS-P05", "title": "内容归纳", "code": ["ios/ShiLv/Services/MemoryAnalysisService.swift"], "evidence": "VNClassifyImageRequest after confirmation" },
+    { "id": "IOS-P06", "title": "地点和双向联动地图", "code": ["ios/ShiLv/Services/PlaceNameService.swift", "ios/ShiLv/Features/Map/TripMapView.swift", "ios/ShiLv/Features/Event/EventDetailView.swift"] },
+    { "id": "IOS-P07", "title": "事实纠错、合并/拆分、精选、隐藏/删除和补记忆", "code": ["ios/ShiLv/Features/Event/EventDetailView.swift", "ios/ShiLv/Services/TripStore.swift"], "tests": ["ios/ShiLvTests/TripDetectorTests.swift"] },
+    { "id": "IOS-P08", "title": "收藏、保存和分享回忆卡", "code": ["ios/ShiLv/Features/Memory/MemoryCardView.swift"] },
+    { "id": "IOS-P09", "title": "缓存、隐私与异常恢复", "code": ["ios/ShiLv/Services/PhotoLibraryService.swift", "ios/ShiLv/Features/Settings/SettingsView.swift", "ios/ShiLv/Shared/PhotoThumbnail.swift", "ios/ShiLv/Resources/PrivacyInfo.xcprivacy"], "tests": ["ios/ShiLvTests/TripDetectorTests.swift"] },
+    { "id": "IOS-P10", "title": "往年今日、随机回忆、封面与旅行导出", "code": ["ios/ShiLv/Features/Discovery/DiscoveryView.swift", "ios/ShiLv/Features/Trip/TripOverviewView.swift", "ios/ShiLv/Features/Settings/SettingsView.swift"], "tests": ["ios/scripts/validate-requirements.js"] }
+  ]
+}

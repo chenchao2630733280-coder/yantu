@@ -2,11 +2,18 @@
   "name": "shilv-wechat-mini-program",
   "version": "1.0.0",
   "private": true,
-  "description": "拾旅 - 自动还原旅行记忆的微信小程序",
+  "description": "拾旅 - 原生 iOS 与微信小程序客户端",
   "scripts": {
     "lint": "node scripts/validate.js",
     "test": "node scripts/test.js",
     "build": "node scripts/build.js",
-    "check": "npm run lint && npm test && npm run build"
+    "check": "npm run lint && npm test && npm run build",
+    "ios:generate": "node ios/scripts/generate-project.js",
+    "ios:lint": "python ios/scripts/validate-swift-structure.py && node ios/scripts/validate-project.js",
+    "ios:test": "node ios/scripts/test-detector-contract.js && node ios/scripts/validate-requirements.js",
+    "ios:assets": "python ios/scripts/validate-assets.py",
+    "ios:check": "npm run ios:generate && npm run ios:lint && npm run ios:test && npm run ios:assets",
+    "android:lint": "node android/scripts/validate-project.js",
+    "android:check": "npm run android:lint"
   }
 }

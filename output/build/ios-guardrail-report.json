@@ -1,0 +1,13 @@
+{
+  "checkType": "path-check",
+  "operation": "write",
+  "paths": [
+    "ios"
+  ],
+  "riskLevel": "low",
+  "blocked": false,
+  "warnings": [
+    "ios: 路径不存在,按 low 处理"
+  ],
+  "timestamp": "2026-08-12T12:41:36+08:00"
+}

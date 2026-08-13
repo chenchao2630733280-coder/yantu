@@ -1,0 +1,32 @@
+{
+  "baseline": "拾旅 App 完整产品设计需求",
+  "generatedAt": "2026-08-12T14:30:00+08:00",
+  "summary": { "mvpItems": 20, "implemented": 20, "runtimeContracts": 15, "windowsVerified": 20, "xcodeVerified": 0, "realDeviceVerified": 0 },
+  "automatedEvidence": [
+    { "command": "pnpm run ios:check", "status": "passed", "covers": ["project", "structure", "assets", "privacy", "detector-contract", "requirements-contract"] },
+    { "command": "pnpm run check", "status": "passed", "covers": ["wechat-regression", "package-preflight"] }
+  ],
+  "requirements": [
+    { "id": "MVP-01", "title": "相册授权", "implementation": "PhotoLibraryService.swift", "contract": "passed", "xcode": "not-run", "realDevice": "required" },
+    { "id": "MVP-02", "title": "读取照片时间", "implementation": "PhotoLibraryService.swift", "contract": "passed", "xcode": "not-run", "realDevice": "required" },
+    { "id": "MVP-03", "title": "读取照片位置", "implementation": "PhotoLibraryService.swift", "contract": "passed", "xcode": "not-run", "realDevice": "required" },
+    { "id": "MVP-04", "title": "自动发现旅行", "implementation": "TripDetector.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-05", "title": "用户确认旅行", "implementation": "TripDiscoveryView.swift", "contract": "passed", "uiTest": "manual-required" },
+    { "id": "MVP-06", "title": "自动 Day 划分", "implementation": "TripDetector.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-07", "title": "自动识别地点", "implementation": "MemoryAnalysisService.swift", "contract": "passed", "realDevice": "required" },
+    { "id": "MVP-08", "title": "自动聚类事件", "implementation": "TripDetector.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-09", "title": "精选代表照片", "implementation": "TripDetector.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-10", "title": "Day 时间线", "implementation": "DayTimelineView.swift", "contract": "passed", "uiTest": "manual-required" },
+    { "id": "MVP-11", "title": "旅行地图", "implementation": "TripMapView.swift", "contract": "passed", "uiTest": "manual-required" },
+    { "id": "MVP-12", "title": "事件详情", "implementation": "EventDetailView.swift", "contract": "passed", "uiTest": "manual-required" },
+    { "id": "MVP-13", "title": "简短旅行描述", "implementation": "MemoryAnalysisService.swift", "contract": "passed", "realDevice": "required" },
+    { "id": "MVP-14", "title": "补一句记忆", "implementation": "EventDetailView.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-15", "title": "纠正地点", "implementation": "EventDetailView.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-16", "title": "纠正时间", "implementation": "EventDetailView.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-17", "title": "合并与拆分事件", "implementation": "EventDetailView.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-18", "title": "隐藏与删除事件", "implementation": "EventDetailView.swift", "contract": "passed", "xctest": "written-not-run" },
+    { "id": "MVP-19", "title": "旅行总结卡", "implementation": "MemoryCardView.swift", "contract": "passed", "uiTest": "manual-required" },
+    { "id": "MVP-20", "title": "本地缓存管理", "implementation": "PhotoLibraryService.swift + SettingsView.swift", "contract": "passed", "realDevice": "required" }
+  ],
+  "releaseDecision": "blocked-until-xcode-and-real-device-verification"
+}

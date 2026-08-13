@@ -1,0 +1,9 @@
+{
+  "status": "optimized_source_complete_xcode_verification_required",
+  "blocking": [
+    { "id": "IOS-BLK-001", "reason": "Official Xcode compile and XCTest require macOS/Xcode" },
+    { "id": "IOS-BLK-002", "reason": "PhotoKit whole-library performance and permissions require a real iPhone photo library" },
+    { "id": "IOS-BLK-003", "reason": "App Store distribution requires Apple Developer Team, unique Bundle ID and App Store Connect metadata" },
+    { "id": "IOS-BLK-004", "reason": "Current workspace has no Git remote, so the prepared macOS GitHub Actions workflow cannot be dispatched from this environment" }
+  ]
+}

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">拾旅</string>
+    <string name="photo_usage_description">拾旅读取照片的拍摄时间和地点，在这台设备上自动发现旅行并生成回忆时间线。当前版本不会上传照片原图。</string>
+</resources>

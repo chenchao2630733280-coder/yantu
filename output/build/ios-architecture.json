@@ -1,0 +1,16 @@
+{
+  "projectRoot": "D:\\work\\AIPM\\Project_yantu\\ios",
+  "platform": "iOS 17+",
+  "stack": ["Swift 5", "SwiftUI", "PhotoKit", "Vision", "MapKit", "CoreLocation"],
+  "dependencies": [],
+  "modules": [
+    { "name": "PhotoLibraryService", "role": "PhotoKit permission, whole-library metadata fetch, on-demand images and disposable thumbnail disk cache" },
+    { "name": "TripDetector", "role": "home inference, away-photo clustering, day and event segmentation" },
+    { "name": "MemoryAnalysisService", "role": "on-device Vision classification after trip confirmation" },
+    { "name": "PlaceNameService", "role": "Apple reverse geocoding for trip/event labels" },
+    { "name": "TripStore", "role": "file-protected local JSON index and user edit merge" },
+    { "name": "SwiftUI Features", "role": "discovery, trip, day, event, map, memory and settings" }
+  ],
+  "data": { "systemPhotos": "read-only PhotoKit references", "localIndex": "Application Support/travel-index-v1.json", "thumbnailCache": "Caches/ShiLvThumbnails, disposable", "cloudBackend": null },
+  "commands": { "windowsStatic": "npm run ios:check", "macOSFull": "cd ios && ./scripts/verify-on-macos.sh" }
+}

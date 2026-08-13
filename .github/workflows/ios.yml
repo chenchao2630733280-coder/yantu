@@ -1,0 +1,79 @@
+name: iOS
+
+on:
+  push:
+    paths:
+      - "ios/**"
+      - "package.json"
+      - ".github/workflows/ios.yml"
+  pull_request:
+    paths:
+      - "ios/**"
+      - "package.json"
+      - ".github/workflows/ios.yml"
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+
+      - name: Generate and validate project
+        run: |
+          node ios/scripts/generate-project.js
+          node ios/scripts/validate-project.js
+          python3 ios/scripts/validate-swift-structure.py
+          node ios/scripts/test-detector-contract.js
+          node ios/scripts/validate-requirements.js
+
+      - name: List project and schemes
+        working-directory: ios
+        run: xcodebuild -project ShiLv.xcodeproj -list
+
+      - name: Build app for iOS Simulator
+        working-directory: ios
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project ShiLv.xcodeproj \
+            -scheme ShiLv \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build | tee xcodebuild-simulator.log
+
+      - name: Run unit tests
+        working-directory: ios
+        run: |
+          set -o pipefail
+          DEVICE_ID="$(xcrun simctl list devices available --json | python3 -c 'import json,sys; d=json.load(sys.stdin)["devices"]; print(next(x["udid"] for runtime in d.values() for x in runtime if x["name"].startswith("iPhone")))')"
+          xcodebuild \
+            -project ShiLv.xcodeproj \
+            -scheme ShiLv \
+            -destination "platform=iOS Simulator,id=${DEVICE_ID}" \
+            test | tee xcodebuild-tests.log
+
+      - name: Build unsigned Release for iPhoneOS
+        working-directory: ios
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project ShiLv.xcodeproj \
+            -scheme ShiLv \
+            -configuration Release \
+            -sdk iphoneos \
+            CODE_SIGNING_ALLOWED=NO \
+            build | tee xcodebuild-release.log
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-xcodebuild-logs
+          path: ios/xcodebuild-*.log

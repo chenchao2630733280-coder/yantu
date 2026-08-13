@@ -1,0 +1,11 @@
+{
+  "checkType": "path-check",
+  "operation": "write",
+  "paths": [
+    "project.config.json"
+  ],
+  "riskLevel": "low",
+  "blocked": false,
+  "warnings": [],
+  "timestamp": "2026-08-12T13:41:58+08:00"
+}
