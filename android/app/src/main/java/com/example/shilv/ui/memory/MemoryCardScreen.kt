@@ -48,13 +48,13 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toIntSize
 import androidx.core.content.FileProvider
 import com.example.shilv.data.DiscoveredTrip
 import com.example.shilv.data.TripDates
@@ -96,10 +96,10 @@ fun MemoryCardScreen(model: AppModel, tripId: String) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .drawWithContent {
-                        posterLayer.record { this@drawWithContent.drawContent() }
+                        val posterSize = size.toIntSize()
+                        posterLayer.record(size = posterSize) { this@drawWithContent.drawContent() }
                         drawLayer(posterLayer)
-                    }
-                    .onGloballyPositioned { posterLayer.size = it.size },
+                    },
             ) {
                 MemoryPoster(trip = trip, coverImage = coverImage, footprintImages = footprintImages, loader = loader)
             }
