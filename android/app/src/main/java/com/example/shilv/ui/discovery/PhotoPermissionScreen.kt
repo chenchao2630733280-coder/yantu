@@ -1,5 +1,9 @@
 package com.example.shilv.ui.discovery
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -40,6 +44,14 @@ import com.example.shilv.ui.theme.Paper
 
 @Composable
 fun PhotoPermissionScreen(model: AppModel) {
+    val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        Manifest.permission.READ_MEDIA_IMAGES
+    } else {
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    }
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
+        model.requestAndScan()
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -70,7 +82,7 @@ fun PhotoPermissionScreen(model: AppModel) {
         }
         Spacer(Modifier.height(26.dp))
         Button(
-            onClick = { model.requestAndScan() },
+            onClick = { launcher.launch(permission) },
             modifier = Modifier.fillMaxWidth().height(56.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Ink),
             shape = RoundedCornerShape(16.dp),
