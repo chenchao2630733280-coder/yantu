@@ -66,6 +66,7 @@ jobs:
           fi
 
       - name: Build Release APK
+        if: env.ANDROID_SIGNING_STOREFILE != ''
         working-directory: android
         run: gradle :app:assembleRelease --stacktrace
 
@@ -73,6 +74,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: shilv-apk
+          if-no-files-found: ignore
           path: |
             android/app/build/outputs/apk/debug/*.apk
             android/app/build/outputs/apk/release/*.apk
