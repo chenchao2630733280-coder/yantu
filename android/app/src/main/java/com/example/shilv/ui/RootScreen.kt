@@ -2,9 +2,9 @@ package com.example.shilv.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PhotoLibrary
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -53,8 +53,8 @@ object Routes {
 private data class TabItem(val route: String, val label: String, val icon: ImageVector)
 
 private val topTabs = listOf(
-    TabItem(Routes.Discovery, "回忆", Icons.Filled.PhotoLibrary),
-    TabItem(Routes.Timeline, "时间线", Icons.Filled.CalendarMonth),
+    TabItem(Routes.Discovery, "回忆", Icons.Filled.Star),
+    TabItem(Routes.Timeline, "时间线", Icons.Filled.DateRange),
     TabItem(Routes.Settings, "我", Icons.Filled.Person),
 )
 

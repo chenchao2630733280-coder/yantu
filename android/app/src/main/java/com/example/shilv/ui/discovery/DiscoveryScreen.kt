@@ -19,13 +19,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarMonth
-import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.LockPerson
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Shuffle
-import androidx.compose.material.icons.filled.Sparkles
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -168,7 +165,7 @@ private fun EmptyState() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Icon(Icons.Filled.Map, contentDescription = null, tint = Muted, modifier = Modifier.size(40.dp))
+        Icon(Icons.Filled.Place, contentDescription = null, tint = Muted, modifier = Modifier.size(40.dp))
         Spacer(Modifier.height(12.dp))
         Text("还没有发现旅行", fontSize = 18.sp, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(6.dp))
@@ -233,7 +230,7 @@ private fun TripDiscoveryCard(trip: DiscoveredTrip, loader: suspend (String, Int
             Text(formatTripRange(trip.startDate, trip.endDate), color = Muted, fontSize = 12.sp)
             Text("${trip.dayCount} 天 · ${trip.photoCount} 张 · ${trip.eventCount} 个事件", color = Muted, fontSize = 12.sp)
         }
-        Icon(Icons.Filled.ChevronRight, contentDescription = null, tint = Muted)
+        Icon(Icons.Filled.KeyboardArrowRight, contentDescription = null, tint = Muted)
     }
 }
 

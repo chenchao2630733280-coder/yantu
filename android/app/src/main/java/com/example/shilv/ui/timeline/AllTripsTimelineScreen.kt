@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -65,7 +67,7 @@ fun AllTripsTimelineScreen(model: AppModel, navController: NavController) {
             item {
                 Box(Modifier.fillMaxWidth().padding(top = 80.dp), contentAlignment = Alignment.Center) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(androidx.compose.material.icons.Icons.Filled.CalendarMonth, contentDescription = null, tint = Muted, modifier = Modifier.size(40.dp))
+                        Icon(Icons.Filled.DateRange, contentDescription = null, tint = Muted, modifier = Modifier.size(40.dp))
                         Spacer(Modifier.height(12.dp))
                         Text("还没有旅行", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                         Text("完成照片库扫描后，旅行会按年份出现在这里。", color = Muted, fontSize = 13.sp)

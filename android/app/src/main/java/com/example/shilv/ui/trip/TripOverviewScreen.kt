@@ -24,12 +24,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Photo
-import androidx.compose.material.icons.filled.Sparkles
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -92,7 +91,7 @@ fun TripOverviewScreen(model: AppModel, navController: NavController, tripId: St
             IconButton(onClick = { val updated = trip.copy(isFavorite = !trip.favorite); model.update(updated) }) {
                 Icon(if (trip.favorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder, contentDescription = "收藏", tint = Orange)
             }
-            IconButton(onClick = { showCoverPicker = true }) { Icon(Icons.Filled.Photo, contentDescription = "更换封面", tint = Ink) }
+            IconButton(onClick = { showCoverPicker = true }) { Icon(Icons.Filled.Edit, contentDescription = "更换封面", tint = Ink) }
             IconButton(onClick = { draftTitle = trip.title; showRename = true }) { Icon(Icons.Filled.MoreVert, contentDescription = "更多", tint = Ink) }
         }
 
@@ -114,7 +113,7 @@ fun TripOverviewScreen(model: AppModel, navController: NavController, tripId: St
                         Text(trip.visibleEvents.take(5).map { it.placeName ?: it.title }.joinToString("  →  "), color = Muted, fontSize = 14.sp)
                         Spacer(Modifier.height(10.dp))
                         OutlinedButton(onClick = { navController.navigate(Routes.tripMap(trip.id)) }) {
-                            Icon(Icons.Filled.Map, contentDescription = null, modifier = Modifier.width(16.dp))
+                            Icon(Icons.Filled.Place, contentDescription = null, modifier = Modifier.width(16.dp))
                             Spacer(Modifier.width(6.dp))
                             Text("打开记忆地图")
                         }

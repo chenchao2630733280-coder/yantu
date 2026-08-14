@@ -17,7 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Sparkles
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -70,7 +70,7 @@ fun TripDiscoveryScreen(model: AppModel, navController: NavController, tripId: S
             GradientOverlay()
             Column(Modifier.align(Alignment.BottomStart).padding(24.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Filled.Sparkles, contentDescription = null, tint = Color.White, modifier = Modifier.width(14.dp))
+                    Icon(Icons.Filled.Star, contentDescription = null, tint = Color.White, modifier = Modifier.width(14.dp))
                     Spacer(Modifier.width(4.dp))
                     Text("发现一段旅程", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                 }

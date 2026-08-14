@@ -14,10 +14,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.PhotoLibrary
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -52,7 +52,7 @@ fun PhotoPermissionScreen(model: AppModel) {
             modifier = Modifier.size(112.dp).background(Orange.copy(alpha = 0.12f), CircleShape),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(Icons.Filled.PhotoLibrary, contentDescription = null, tint = Orange, modifier = Modifier.size(42.dp))
+            Icon(Icons.Filled.Star, contentDescription = null, tint = Orange, modifier = Modifier.size(42.dp))
         }
         Spacer(Modifier.height(26.dp))
         Text("让照片，重新变成旅途", fontSize = 30.sp, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
@@ -64,7 +64,7 @@ fun PhotoPermissionScreen(model: AppModel) {
         Spacer(Modifier.height(20.dp))
         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
             PermissionRow(Icons.Filled.Lock, "你的照片不会被复制到拾旅")
-            PermissionRow(Icons.Filled.Map, "地点名称由系统服务按需解析")
+            PermissionRow(Icons.Filled.Place, "地点名称由系统服务按需解析")
             PermissionRow(Icons.Filled.CheckCircle, "全部照片：扫描整个照片库，发现完整旅程")
             PermissionRow(Icons.Filled.Settings, "随时可在系统设置中更改权限")
         }

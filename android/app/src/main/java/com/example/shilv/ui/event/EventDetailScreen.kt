@@ -20,10 +20,9 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -284,7 +283,7 @@ private fun FactActions(
         if (event.location != null) {
             Spacer(Modifier.height(8.dp))
             OutlinedButton(onClick = { navController.navigate(Routes.tripMap(trip.id)) }) {
-                Icon(Icons.Filled.Map, contentDescription = null, modifier = Modifier.width(16.dp))
+                Icon(Icons.Filled.Place, contentDescription = null, modifier = Modifier.width(16.dp))
                 Spacer(Modifier.width(6.dp))
                 Text("在记忆地图中查看")
             }
