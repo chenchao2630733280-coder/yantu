@@ -1,7 +1,8 @@
 package com.example.shilv.ui.memory
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.pdf.PdfDocument
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,17 +37,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.layer.drawLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.FileProvider
 import com.example.shilv.data.DiscoveredTrip
 import com.example.shilv.data.TripDates
 import com.example.shilv.ui.AppModel
@@ -60,9 +69,11 @@ import com.example.shilv.ui.theme.Orange
 import com.example.shilv.ui.theme.Paper
 import com.example.shilv.ui.theme.PosterBg
 import kotlinx.coroutines.launch
+import java.io.File
 
 @Composable
 fun MemoryCardScreen(model: AppModel, tripId: String) {
+    val context = LocalContext.current
     val trip = remember(model.dataRevision.value) { model.trips.firstOrNull { it.id == tripId } }
     if (trip == null) {
         Box(Modifier.fillMaxSize().background(PosterBg))
@@ -73,10 +84,25 @@ fun MemoryCardScreen(model: AppModel, tripId: String) {
     val footprintImages = remember { mutableStateMapOf<String, Bitmap>() }
     val scope = rememberCoroutineScope()
     val loader: suspend (String, Int) -> Bitmap? = { id, size -> model.loadImage(id, size) }
+    val shareIncludesMemories = remember {
+        context.getSharedPreferences("shilv", Context.MODE_PRIVATE).getBoolean("shareIncludesMemories", true)
+    }
+    val posterLayer = rememberGraphicsLayer()
+    var isSharing by remember { mutableStateOf(false) }
 
     Column(Modifier.fillMaxSize().background(PosterBg).verticalScroll(rememberScrollState())) {
         Column(Modifier.padding(20.dp)) {
-            MemoryPoster(trip = trip, coverImage = coverImage, footprintImages = footprintImages, loader = loader)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .drawWithContent {
+                        posterLayer.record { this@drawWithContent.drawContent() }
+                        drawLayer(posterLayer)
+                    }
+                    .onGloballyPositioned { posterLayer.size = it.size },
+            ) {
+                MemoryPoster(trip = trip, coverImage = coverImage, footprintImages = footprintImages, loader = loader)
+            }
             Spacer(Modifier.height(12.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Button(
@@ -90,6 +116,7 @@ fun MemoryCardScreen(model: AppModel, tripId: String) {
                 Button(
                     onClick = {
                         scope.launch {
+                            isSharing = true
                             if (trip.coverPhotoID != null) {
                                 coverImage = model.loadImage(trip.coverPhotoID!!, 1170)
                             }
@@ -98,13 +125,42 @@ fun MemoryCardScreen(model: AppModel, tripId: String) {
                                     model.loadImage(id, 420)?.let { footprintImages[id] = it }
                                 }
                             }
+                            // 等待海报重绘后再捕获画面
+                            withFrameNanos { }
+                            withFrameNanos { }
+                            val bitmap = posterLayer.toImageBitmap().asAndroidBitmap()
+                            val dir = File(context.cacheDir, "shared").apply { mkdirs() }
+                            val file = File(dir, "memory-card.jpg")
+                            file.outputStream().use { bitmap.compress(Bitmap.CompressFormat.JPEG, 90, it) }
+                            val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+                            val intent = Intent(Intent.ACTION_SEND).apply {
+                                type = "image/jpeg"
+                                putExtra(Intent.EXTRA_STREAM, uri)
+                                putExtra(Intent.EXTRA_TEXT, shareText(trip, shareIncludesMemories))
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+                            context.startActivity(Intent.createChooser(intent, "分享回忆卡"))
+                            isSharing = false
                         }
                     },
+                    enabled = !isSharing,
                     colors = ButtonDefaults.buttonColors(containerColor = Ink),
-                ) { Icon(Icons.Filled.Share, contentDescription = null, modifier = Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("加载回忆卡") }
+                ) {
+                    Icon(Icons.Filled.Share, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text(if (isSharing) "生成中…" else "保存 / 分享")
+                }
             }
         }
     }
+}
+
+private fun shareText(trip: DiscoveredTrip, includesMemories: Boolean): String {
+    val base = "${trip.title} · ${formatTripRange(trip.startDate, trip.endDate)}\n" +
+        "${trip.dayCount} 天，${trip.photoCount} 张照片，${trip.eventCount} 个记忆事件。"
+    if (!includesMemories) return base
+    val note = trip.visibleEvents.map { it.note }.firstOrNull { it.isNotEmpty() }
+    return if (note != null) "$base\n“$note”" else base
 }
 
 @Composable

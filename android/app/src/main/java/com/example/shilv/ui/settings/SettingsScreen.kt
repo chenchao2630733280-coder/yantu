@@ -1,5 +1,6 @@
 package com.example.shilv.ui.settings
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -46,11 +48,13 @@ import com.example.shilv.ui.theme.Paper
 
 @Composable
 fun SettingsScreen(model: AppModel) {
+    val context = LocalContext.current
     val dataRevision by model.dataRevision.collectAsState()
     val thumbnailCacheSize by model.thumbnailCacheSize.collectAsState()
     val snapshot = remember(dataRevision) { model.snapshot }
     var showReset by remember { mutableStateOf(false) }
-    var shareIncludesMemories by remember { mutableStateOf(true) }
+    val prefs = remember { context.getSharedPreferences("shilv", Context.MODE_PRIVATE) }
+    var shareIncludesMemories by remember { mutableStateOf(prefs.getBoolean("shareIncludesMemories", true)) }
 
     Column(Modifier.fillMaxSize().background(Paper).verticalScroll(rememberScrollState()).padding(20.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -94,7 +98,10 @@ fun SettingsScreen(model: AppModel) {
         SectionTitle("分享设置")
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
             Text("回忆卡包含我的补充记忆", modifier = Modifier.weight(1f), fontSize = 14.sp)
-            Switch(checked = shareIncludesMemories, onCheckedChange = { shareIncludesMemories = it })
+            Switch(checked = shareIncludesMemories, onCheckedChange = {
+                shareIncludesMemories = it
+                prefs.edit().putBoolean("shareIncludesMemories", it).apply()
+            })
         }
         Text("关闭后，保存和分享的回忆卡不会带上你写下的话。", color = Muted, fontSize = 12.sp)
 
