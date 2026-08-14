@@ -95,7 +95,7 @@ fun MemoryCardScreen(model: AppModel, tripId: String) {
                             }
                             trip.visibleEvents.take(4).forEach { event ->
                                 event.coverPhotoID?.let { id ->
-                                    footprintImages[id] = model.loadImage(id, 420)
+                                    model.loadImage(id, 420)?.let { footprintImages[id] = it }
                                 }
                             }
                         }

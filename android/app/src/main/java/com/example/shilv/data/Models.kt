@@ -12,7 +12,7 @@ data class GeoPoint(
     val latitude: Double,
     val longitude: Double,
 ) {
-    fun distance(to other: GeoPoint): Double {
+    fun distance(other: GeoPoint): Double {
         val earthRadius = 6371000.0
         val dLat = Math.toRadians(other.latitude - latitude)
         val dLon = Math.toRadians(other.longitude - longitude)
@@ -140,7 +140,7 @@ data class DiscoveredTrip(
 
     val cityCount: Int get() = visibleEvents.mapNotNull { it.cityName }.toSet().size
 
-    val routeDistanceMeters: Double {
+    val routeDistanceMeters: Double get() {
         val points = days.flatMap { it.events }.sortedBy { it.startDate }.mapNotNull { it.location }
         var total = 0.0
         for (i in 0 until points.size - 1) total += points[i].distance(points[i + 1])

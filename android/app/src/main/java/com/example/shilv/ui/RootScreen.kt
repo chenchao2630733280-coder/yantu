@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.shilv.data.PhotoAccessState
 import com.example.shilv.ui.discovery.DiscoveryScreen
 import com.example.shilv.ui.discovery.PhotoPermissionScreen
 import com.example.shilv.ui.discovery.TripDiscoveryScreen

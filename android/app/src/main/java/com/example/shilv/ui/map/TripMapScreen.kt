@@ -35,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -192,9 +193,11 @@ private fun computeProjections(events: List<MemoryEvent>, scale: Float, size: an
     val usableH = h * scale - pad * 2
     val cx = w / 2
     val cy = h / 2
+    val spanLon = (maxLon - minLon).toFloat().coerceAtLeast(1e-9f)
+    val spanLat = (maxLat - minLat).toFloat().coerceAtLeast(1e-9f)
     return located.map { (id, p) ->
-        val x = pad + ((p.longitude - minLon) / (if (maxLon > minLon) maxLon - minLon else 1e-9)) * usableW
-        val rawY = h * scale - (pad + ((p.latitude - minLat) / (if (maxLat > minLat) maxLat - minLat else 1e-9)) * usableH)
+        val x = pad + ((p.longitude - minLon).toFloat() / spanLon) * usableW
+        val rawY = h * scale - (pad + ((p.latitude - minLat).toFloat() / spanLat) * usableH)
         val offset = Offset(cx + (x - cx) * scale, cy + (rawY - cy) * scale)
         id to offset
     }

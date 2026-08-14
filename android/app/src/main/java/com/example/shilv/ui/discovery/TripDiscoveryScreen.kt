@@ -80,9 +80,9 @@ fun TripDiscoveryScreen(model: AppModel, navController: NavController, tripId: S
         }
         Spacer(Modifier.height(20.dp))
         Row {
-            DiscoveryStat("${trip.dayCount}", "天")
-            DiscoveryStat("${trip.photoCount}", "张照片")
-            DiscoveryStat("${trip.placeCount}", "个地点")
+            DiscoveryStat("${trip.dayCount}", "天", Modifier.weight(1f))
+            DiscoveryStat("${trip.photoCount}", "张照片", Modifier.weight(1f))
+            DiscoveryStat("${trip.placeCount}", "个地点", Modifier.weight(1f))
         }
         if (trip.cityCount > 0) {
             Spacer(Modifier.height(10.dp))
@@ -139,8 +139,8 @@ fun TripDiscoveryScreen(model: AppModel, navController: NavController, tripId: S
 }
 
 @Composable
-private fun DiscoveryStat(value: String, label: String) {
-    Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+private fun DiscoveryStat(value: String, label: String, modifier: Modifier = Modifier) {
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
         Text(label, color = Muted, fontSize = 12.sp)
     }

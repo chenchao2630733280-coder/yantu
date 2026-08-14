@@ -18,7 +18,7 @@ class TripStore(
 ) {
     private val file: File = File(storageDirectory, "travel-index-v1.json")
 
-    var snapshot: ScanSnapshot?
+    var snapshot: ScanSnapshot? = null
         private set
 
     init {

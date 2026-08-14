@@ -198,15 +198,15 @@ private fun Hero(trip: DiscoveredTrip, loader: suspend (String, Int) -> Bitmap?)
 @Composable
 private fun StatsRow(trip: DiscoveredTrip) {
     Row(Modifier.fillMaxWidth().padding(vertical = 18.dp).clip(RoundedCornerShape(22.dp)).background(Color.White)) {
-        StatCell("${trip.dayCount}", "天")
-        StatCell("${trip.photoCount}", "张照片")
-        StatCell("${trip.placeCount}", "个地点")
+        StatCell("${trip.dayCount}", "天", Modifier.weight(1f))
+        StatCell("${trip.photoCount}", "张照片", Modifier.weight(1f))
+        StatCell("${trip.placeCount}", "个地点", Modifier.weight(1f))
     }
 }
 
 @Composable
-private fun StatCell(value: String, label: String) {
-    Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+private fun StatCell(value: String, label: String, modifier: Modifier = Modifier) {
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(value, fontSize = 18.sp, fontWeight = FontWeight.Bold)
         Text(label, color = Muted, fontSize = 12.sp)
     }
