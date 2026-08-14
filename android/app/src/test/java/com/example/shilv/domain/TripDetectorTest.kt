@@ -127,12 +127,16 @@ class TripDetectorTest {
         val eventID = java.util.UUID.randomUUID().toString()
         var trip = makeTrip(id = java.util.UUID.randomUUID().toString(), start = base, end = base + 2 * 86_400_000L, eventID = eventID, title = "旅行", note = "")
         val removedID = java.util.UUID.randomUUID().toString()
-        trip.days = trip.days.map { it.copy(events = it.events + MemoryEvent(removedID, "下一站", base + 5_000, base + 6_000, listOf("c"), null, null, "", false)) }
+        val removedEvent = MemoryEvent(
+            id = removedID, title = "下一站", startDate = base + 5_000, endDate = base + 6_000,
+            photoIDs = listOf("c"), note = "", isHidden = false,
+        )
+        trip.days = trip.days.map { it.copy(events = it.events + removedEvent) }
         store.replace(ScanSnapshot(1, base, 3, 3, null, listOf(trip)))
         trip = trip.copy(days = trip.days.map { it.copy(events = it.events.filterNot { e -> e.id == removedID }) }, suppressedEventIDs = listOf(removedID))
         store.updateTrip(trip)
         var fresh = trip
-        fresh.days = fresh.days.map { it.copy(events = it.events + MemoryEvent(removedID, "下一站", base + 5_000, base + 6_000, listOf("c"), null, null, "", false)) }
+        fresh.days = fresh.days.map { it.copy(events = it.events + removedEvent) }
         store.replace(ScanSnapshot(1, base + 1, 3, 3, null, listOf(fresh)))
         assertFalse(store.snapshot!!.trips.first().visibleEvents.any { it.id == removedID })
         storeDir.deleteRecursively()
@@ -142,8 +146,14 @@ class TripDetectorTest {
     fun tripStatisticsUseRouteAndDistinctNames() {
         val osaka = GeoPoint(34.6937, 135.5023)
         val kyoto = GeoPoint(35.0116, 135.7681)
-        val first = MemoryEvent("e1", "大阪", base, base + 1_000, listOf("a", "b"), osaka, "大阪城", "大阪市", "日本", "", false)
-        val second = MemoryEvent("e2", "京都", base + 2_000, base + 3_000, listOf("c"), kyoto, "清水寺", "京都市", "日本", "", false)
+        val first = MemoryEvent(
+            id = "e1", title = "大阪", startDate = base, endDate = base + 1_000,
+            photoIDs = listOf("a", "b"), location = osaka, placeName = "大阪城", cityName = "大阪市", countryName = "日本", note = "", isHidden = false,
+        )
+        val second = MemoryEvent(
+            id = "e2", title = "京都", startDate = base + 2_000, endDate = base + 3_000,
+            photoIDs = listOf("c"), location = kyoto, placeName = "清水寺", cityName = "京都市", countryName = "日本", note = "", isHidden = false,
+        )
         val day = TravelDay("d1", TripDates.startOfDay(base), "第一天", listOf(first, second))
         val trip = DiscoveredTrip(
             id = "t1", title = "关西", startDate = base, endDate = base + 3_000, photoIDs = listOf("a", "b", "c"),
@@ -157,8 +167,14 @@ class TripDetectorTest {
 
     @Test
     fun reconcileUpdatesTripRangeAndPhotoReferences() {
-        val visible = MemoryEvent("ve", "新的事件", base + 86_400_000L, base + 90_000, listOf("new-a", "new-b"), null, null, "", false)
-        val hidden = MemoryEvent("he", "隐藏事件", base, base + 1_000, listOf("old"), null, null, "", false)
+        val visible = MemoryEvent(
+            id = "ve", title = "新的事件", startDate = base + 86_400_000L, endDate = base + 90_000,
+            photoIDs = listOf("new-a", "new-b"), note = "", isHidden = false,
+        )
+        val hidden = MemoryEvent(
+            id = "he", title = "隐藏事件", startDate = base, endDate = base + 1_000,
+            photoIDs = listOf("old"), note = "", isHidden = false,
+        )
         val day = TravelDay("d2", TripDates.startOfDay(visible.startDate), "第二天", listOf(hidden, visible))
         var trip = DiscoveredTrip(
             id = "t", title = "旅行", startDate = base, endDate = base + 1_000, photoIDs = listOf("old"),
@@ -174,7 +190,10 @@ class TripDetectorTest {
 
     @Test
     fun hiddenOnlyEventKeepsMatchingReferencesButNotVisibleCount() {
-        val hidden = MemoryEvent("he", "隐藏", base, base + 1_000, listOf("a", "b"), null, null, "", true)
+        val hidden = MemoryEvent(
+            id = "he", title = "隐藏", startDate = base, endDate = base + 1_000,
+            photoIDs = listOf("a", "b"), note = "", isHidden = true,
+        )
         val day = TravelDay("d1", TripDates.startOfDay(base), "第一天", listOf(hidden))
         var trip = DiscoveredTrip(
             id = "t", title = "旅行", startDate = base, endDate = base + 1_000, photoIDs = listOf("a", "b"),
@@ -190,7 +209,10 @@ class TripDetectorTest {
         PhotoRecord(id = id, creationDate = date, location = point, pixelWidth = 4032, pixelHeight = 3024)
 
     private fun makeTrip(id: String, start: Long, end: Long, eventID: String, title: String, note: String): DiscoveredTrip {
-        val event = MemoryEvent(eventID, "下午漫步", start + 2_000, start + 4_000, listOf("a", "b"), null, null, "", note, false)
+        val event = MemoryEvent(
+            id = eventID, title = "下午漫步", startDate = start + 2_000, endDate = start + 4_000,
+            photoIDs = listOf("a", "b"), note = note, isHidden = false,
+        )
         val day = TravelDay("day-$id", TripDates.startOfDay(start), "第一天", listOf(event))
         return DiscoveredTrip(
             id = id, title = title, startDate = start, endDate = end, photoIDs = listOf("a", "b"),
