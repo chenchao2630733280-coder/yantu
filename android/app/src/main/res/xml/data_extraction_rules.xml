@@ -2,7 +2,6 @@
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="root" path="files/travel-index-v1.json" />
-        <exclude domain="cache" path="ShiLvThumbnails/" />
     </cloud-backup>
     <device-transfer>
         <exclude domain="root" path="files/travel-index-v1.json" />

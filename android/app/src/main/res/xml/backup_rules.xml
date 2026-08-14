@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <full-backup-content>
     <exclude domain="root" path="files/travel-index-v1.json" />
-    <exclude domain="cache" path="ShiLvThumbnails/" />
 </full-backup-content>
