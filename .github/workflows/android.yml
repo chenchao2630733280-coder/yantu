@@ -33,13 +33,14 @@ jobs:
         run: |
           sdkmanager "platforms;android-35" "build-tools;34.0.0" || true
 
+      - name: Install Gradle 8.9
+        run: |
+          curl -sSL -o /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.9-bin.zip
+          unzip -q /tmp/gradle.zip -d /opt
+          echo "/opt/gradle-8.9/bin" >> "$GITHUB_PATH"
+
       - name: Static validation
         run: node android/scripts/validate-project.js
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.9"
 
       - name: Run unit tests
         working-directory: android
