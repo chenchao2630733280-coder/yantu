@@ -173,7 +173,7 @@ class TripDetectorTest {
         )
         val hidden = MemoryEvent(
             id = "he", title = "隐藏事件", startDate = base, endDate = base + 1_000,
-            photoIDs = listOf("old"), note = "", isHidden = false,
+            photoIDs = listOf("old"), note = "", isHidden = true,
         )
         val day = TravelDay("d2", TripDates.startOfDay(visible.startDate), "第二天", listOf(hidden, visible))
         var trip = DiscoveredTrip(
