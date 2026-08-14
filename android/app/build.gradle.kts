@@ -5,6 +5,16 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+import java.util.Properties
+
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.inputStream().use { keystoreProperties.load(it) }
+}
+fun signingProp(name: String): String? =
+    keystoreProperties.getProperty(name) ?: System.getenv("ANDROID_SIGNING_$name")
+
 android {
     namespace = "com.example.shilv"
     compileSdk = 35
@@ -17,10 +27,21 @@ android {
         versionName = "1.0.0"
     }
 
+    signingConfigs {
+        create("release") {
+            val storeFileProp = signingProp("STOREFILE")
+            if (storeFileProp != null) this.storeFile = file(storeFileProp)
+            storePassword = signingProp("STOREPASSWORD")
+            keyAlias = signingProp("KEYALIAS")
+            keyPassword = signingProp("KEYPASSWORD")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

@@ -52,7 +52,20 @@ jobs:
         working-directory: android
         run: gradle :app:assembleDebug --stacktrace
 
-      - name: Build Release APK (unsigned)
+      - name: Prepare release signing
+        working-directory: android
+        shell: bash
+        run: |
+          if [ -n "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" ]; then
+            mkdir -p app
+            echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > app/release.keystore
+            echo "ANDROID_SIGNING_STOREFILE=release.keystore" >> "$GITHUB_ENV"
+            echo "ANDROID_SIGNING_STOREPASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> "$GITHUB_ENV"
+            echo "ANDROID_SIGNING_KEYALIAS=${{ secrets.ANDROID_KEY_ALIAS }}" >> "$GITHUB_ENV"
+            echo "ANDROID_SIGNING_KEYPASSWORD=${{ secrets.ANDROID_KEY_PASSWORD }}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build Release APK
         working-directory: android
         run: gradle :app:assembleRelease --stacktrace
 

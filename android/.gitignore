@@ -8,3 +8,6 @@ local.properties
 /cxx
 .externalNativeBuild
 **/build/
+keystore.properties
+*.keystore
+*.jks
